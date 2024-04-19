@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score, confusion_matrix, roc_curve, auc, roc_auc_score
+from sklearn.metrics import accuracy_score, confusion_matrix, roc_curve, auc, roc_auc_score, f1_score
 from sklearn.preprocessing import label_binarize
 from sklearn.multiclass import OneVsRestClassifier
 import matplotlib.pyplot as plt
@@ -41,6 +41,14 @@ print(f'Accuracy: {accuracy:.2f}')
 
 roc_auc_ovr = roc_auc_score(y_test, y_score, multi_class="ovr", average="weighted")
 print(f'ROC AUC Score (One-vs-Rest): {roc_auc_ovr:.2f}')
+
+# calculating the F1 score for each class
+f1_scores = f1_score(y_test, y_pred, average=None)
+# calculating the weighted average F1 score
+weighted_f1_score = f1_score(y_test, y_pred, average='weighted')
+
+print(f'F1 Scores for each class: {f1_scores}')
+print(f'F1 Score: {weighted_f1_score}')
 
 # computing ROC curve and ROC AUC for each class
 fpr = dict()
